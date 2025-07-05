@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    </head>
+<body>
+    <main>
+        <div class="page-title-container">
+            <h2 id="page-title">All Products</h2>
+        </div>
+        <div class="shop-layout">
+            <aside class="filter-sidebar">
+                </aside>
+            <section class="product-display-area">
+                <p id="results-count">Loading products...</p>
+                <div class="product-grid" id="product-grid"></div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Arabesque Wood Factory. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // --- Navigation Menu Logic (same as before) ---
+        
+        let allProducts = [];
+
+        async function fetchProducts() {
+            try {
+                const response = await fetch('/products.json');
+                const data = await response.json();
+                allProducts = data.sale;
+                initializeShop();
+            } catch (error) {
+                console.error('Failed to load products:', error);
+                document.getElementById('results-count').textContent = 'Error loading products.';
+            }
+        }
+
+        function initializeShop() {
+            // All your previous filter and display logic goes here
+            // e.g., setupWoodFilters(), applyFilters(), add event listeners
+            // It will now use the `allProducts` array that was just fetched.
+        }
+
+        await fetchProducts();
+    });
+    </script>
+</body>
+</html>

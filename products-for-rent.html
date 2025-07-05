@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    </head>
+<body>
+    <main>
+        <div class="page-title-container">
+            <h2>Products for Rent</h2>
+        </div>
+        <div class="product-grid" id="product-grid">
+            <p>Loading rental products...</p>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Arabesque Wood Factory. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // --- Navigation Menu Logic (same as before) ---
+
+        const productGrid = document.getElementById('product-grid');
+
+        async function loadRentProducts() {
+            try {
+                const response = await fetch('/products.json');
+                const data = await response.json();
+                displayRentProducts(data.rent);
+            } catch (error) {
+                console.error('Failed to load rental products:', error);
+                productGrid.innerHTML = '<p>Could not load rental products.</p>';
+            }
+        }
+
+        function displayRentProducts(products) {
+            productGrid.innerHTML = '';
+            if (products.length === 0) {
+                productGrid.innerHTML = '<p>No products currently available for rent.</p>';
+                return;
+            }
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-card-content">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <a href="https://wa.me/96171579684?text=I'm%20interested%20in%20renting%20the%20${encodeURIComponent(product.name)}." class="contact-link" target="_blank">Contact us for more info</a>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+        
+        await loadRentProducts();
+    });
+    </script>
+</body>
+</html>

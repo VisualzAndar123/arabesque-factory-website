@@ -1,0 +1,16 @@
+{
+  "name": "arabesque-website",
+  "version": "1.0.0",
+  "description": "Website for Arabesque Wood Factory",
+  "main": "index.js",
+  "scripts": {
+    "build:data": "node build-data.js",
+    "build": "npm run build:data"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "gray-matter": "^4.0.3"
+  }
+}

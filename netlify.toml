@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build && cp -r static/* dist/ && cp index.html dist/ && cp products-for-sale.html dist/ && cp products-for-rent.html dist/ && cp -r admin dist/"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  command = "npm run build:data && serve"
+  targetPort = 8888
+  publish = "."
